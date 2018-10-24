@@ -6,9 +6,11 @@ var concat = require("gulp-concat");
 var cache = require('gulp-cache');
 var imagemin = require('gulp-imagemin');
 var bs = require('browser-sync').create();
+var sass = require("gulp-sass");
 
 
 var path = {
+    'html' : './templates/**/',
     'css' : './src/css/',
     'js' : './src/js/',
     'images' : './src/images/',
@@ -16,15 +18,21 @@ var path = {
     'js_dist' : './dist/js',
     'images_dist' : './dist/images/'
 };
+//定义一个html任务
+gulp.task('html',function () {
+   gulp.src(path.html+'*.html')
+       .pipe(bs.stream())
+});
 
 
 //定义一个css任务
 gulp.task('css',function () {
-    gulp.src(path.css+'*.css')
+    gulp.src(path.css+'*.scss')
+        .pipe(sass().on("error",sass.logError))
         .pipe(cssnano())
         .pipe(rename({'suffix':'.min'}))
         .pipe(gulp.dest(path.css_dist))
-        .pipe(bs.stream)
+        .pipe(bs.stream())
 });
 
 //定义一个js任务
@@ -32,7 +40,7 @@ gulp.task('js',function () {
     gulp.src(path.js+'*.js')
         .pipe(uglify())
         .pipe(gulp.dest(path.js_dist))
-        .pipe(bs.stream)
+        .pipe(bs.stream())
 });
 
 //定义一个图片处理的任务
@@ -40,11 +48,13 @@ gulp.task('images',function () {
     gulp.src(path.images+'*.*')
         .pipe(cache(imagemin()))
         .pipe(gulp.dest(path.images_dist))
+        .pipe(bs.stream())
 });
 
 //定义一个监听任务
 gulp.task('watch',function () {
-    gulp.watch(path.css+'*.css',['css']);
+    gulp.watch(path.html+'*.html',['html']);
+    gulp.watch(path.css+'*.scss',['css']);
     gulp.watch(path.js+'*.js',['js']);
     gulp.watch(path.images+'*.images',['images']);
 });
