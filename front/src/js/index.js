@@ -22,4 +22,5 @@ Banner.prototype.run=function () {
 $(function () {
     var banner =new Banner();
     banner.run()
+    
 });
