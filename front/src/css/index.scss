@@ -92,13 +92,14 @@
 
         .banner-ul{
           overflow: hidden;
-          width: $bannerWidth*2+40px;
+          width: $bannerWidth*2;
           position: absolute;
+          left: 0;
           li{
             float: left;
             width: $bannerWidth;
             height: $bannerHeight;
-            margin-right: 20px;
+
             img{
               width: $bannerWidth;
               height: $bannerHeight;
