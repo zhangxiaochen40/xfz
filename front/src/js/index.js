@@ -1,0 +1,1 @@
+console.assert("hello word");
