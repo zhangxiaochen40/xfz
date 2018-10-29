@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   top:0;
-
+  z-index: 100;
 
   .container{
     width: $pageWidth;
@@ -88,8 +88,8 @@
         height: 201px;
         background: #0e275e;
         position: relative;
-
-
+        overflow: hidden;
+        z-index: 0;
         .banner-ul{
           overflow: hidden;
           width: $bannerWidth*2;

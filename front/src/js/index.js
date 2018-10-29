@@ -3,11 +3,11 @@ function Banner() {
     this.index = 0;
     //轮波图中一个轮波图的宽度
     this.bannerWidth=798;
-    //监听鼠标划过轮波图的事件
-    this.listenBannerHover();
+
     this.leftArrow=$('.left-arrow');
     this.rightArrow=$('.right-arrow');
     this.bannerUl =$('#banner-ul');
+    this.pageControl = $('.page-control');
     this.liList = this.bannerUl.children('li');
     //轮波图的个数
     this.bannerCount = this.liList.length;
@@ -19,9 +19,27 @@ Banner.prototype.run=function () {
     this.ininBanner();
     this.loop();
     this.toggelArrow();
+    //监听鼠标划过轮波图的事件
+    this.listenBannerHover();
     this.listenArrowClick();
-    self.initPageControl()
+
+    self.initPageControl();
+    this.listenPageControl();
 };
+
+//监听轮波图的小点点 的点击事件
+Banner.prototype.listenPageControl = function(){
+    var self =this;
+    self.pageControl.children("li").each(function (index,obj) {
+        $(obj).click(function () {
+            self.index=index;
+
+            self.animate();
+
+        });
+    });
+};
+
 
 Banner.prototype.listenBannerHover = function(){
     var self = this;
@@ -91,6 +109,7 @@ Banner.prototype.ininBanner = function(){
 Banner.prototype.animate = function(){
     var self =this;
     self.bannerUl.animate({'left':-798*self.index},500);
+    self.pageControl.children('li').eq(self.index).addClass('active').siblings().removeClass('active')
 };
 
 //箭头的显示或隐藏
@@ -107,7 +126,7 @@ Banner.prototype.loop = function(){
     var self = this;
     // bannerUl.animate({"left" : -798},500);
     this.timer = setInterval(function () {
-        if(self.index>=1)
+        if(self.index>=self.bannerCount-1)
         {
             self.index=0;
         }
