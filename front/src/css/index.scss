@@ -1,6 +1,9 @@
 @import "init.scss";
 @import "constants.scss";
 
+.body{
+  background: #f2f2f2;
+}
 
 .header{
   width: 100%;
@@ -44,7 +47,7 @@
         }
 
         &.active{
-          border-bottom: 5px solid #5c87d9;
+          border-bottom: 5px solid $themeColor;
         }
 
       }
@@ -70,8 +73,7 @@
   margin-top: 64px+20px;
   .wrapper{
     width: $pageWidth;
-    height: 1000px;
-    background-color: brown;
+    background-color: #f2f2f2;
     margin: 0 auto;
     overflow: hidden;
 
@@ -80,8 +82,8 @@
       $bannerHeight:202px;
       float: left;
       width: 798px;
-      height: 500px;
-      background-color: yellowgreen;
+
+      background-color: #f2f2f2;
 
       .banner-group{
         width: 798px;
@@ -151,11 +153,196 @@
         }
       }
     }
-    .sidebar-wrapper{
+
+  }
+}
+
+.list-outer-group{
+  background: #ffffff;
+  .list-tab{
+    width: 100%;
+    height: 66px;
+    overflow: hidden;
+    border : 2px solid #eee ;
+    border-left: none;
+    border-right: none;
+
+    li{
+      float: left;
+      margin-top: 20px;
+      padding: 0 10px;
+  color:#878787;
+      cursor: pointer;
+      a{
+      }
+      &:first-of-type{
+        border-left: 5px solid #5c87d9;
+      }
+      &.active{
+        a{
+        }
+        color: black;
+      }
+    }
+  }
+
+  .list-inner-group{
+    li{
+      overflow: hidden;
+      border-bottom:1px solid #eeeeee ;
+      padding: 20px;
+      .img{
+        float: left;
+        width: 226px;
+        height: 162px;
+        .pic{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .news-group{
+        position: relative;
+        float: right;
+        width: 504px;
+        height: 162px;
+        .title{
+          color: #212121;
+          font-size: 22px;
+          a{
+
+            &:hover{
+              color: $themeColor;
+            }
+          }
+
+        }
+        .desc{
+            color: #878787;
+            font-size: 14px;
+            margin-top: 10px;
+          }
+        .more{
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          right: 0px;
+          font-size: 14px;
+          color: #878787;
+
+          .category{
+            color: $themeColor;
+          }
+
+          .pub-time{
+            float: right;
+            margin-left: 20px;
+          }
+          .author{
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  .load-more-group{
+    padding: 20px 0;
+    text-align: center;
+    .load-more{
+      width: 402px;
+      height: 40px;
+      background: #d2dcea;
+      color: #6d85ac;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.main{
+  .wrapper{
+     .sidebar-wrapper{
       float: right;
       width: 356px;
-      height: 500px;
-      background-color: blanchedalmond;
+      //height: 500px;
+      background-color: #ffffff;
+
+       .title-group{
+          padding: 20px;
+          overflow: hidden;
+         .title{
+           //float: left;
+           //font-size: 18px;
+           //color: #212121;
+           //font-size: 18px;
+          color: #e63929;
+          width: 315px;
+          height: 25px;
+          line-height: 25px;
+          border-bottom: 2px solid #f77669;
+          margin: 0 auto 25px;
+          padding-top: 25px;
+          padding-bottom: 5px;
+         }
+         .more{
+           float: right;
+           font-size: 14px;
+           color: $themeColor;
+         }
+       }
+       .advertise-group{
+         img{
+           width: 100%;
+         }
+       }
+
+       .focus-group{
+         padding: 0 20px;
+         overflow: hidden;
+         .left-group{
+           width: 190px;
+           float: left;
+           li{
+             width: 100%;
+             height: 50px;
+             background: url("https://www.bufanbiz.com/static/build/images/side-icon.png");
+             background-repeat: no-repeat;
+             background-size: 26%;
+             margin-bottom: 20px;
+
+             a{
+               float: left;
+               margin-left:90px ;
+               margin-top: 10px;
+               color: #878787;
+               font-size: 14px;
+             }
+           }
+           .zhihu{
+             background-position: 0 0;
+           }
+           .weibo {
+             background-position: 0 -63px;
+           }
+           .toutiao{
+            background-position: 0 -125px;
+           }
+         }
+
+         .right-group{
+           float: right;
+           width: 108px;
+           background: url("https://www.bufanbiz.com/static/build/images/bufanclass-wechat.jpg");
+           background-repeat: no-repeat;
+           background-size: 100%;
+           .desc{
+             margin-top: 100px;
+             text-align: center;
+             color: #878787;
+             font-size: 12px;
+           }
+         }
+       }
     }
   }
 }
