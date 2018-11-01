@@ -343,6 +343,57 @@
            }
          }
        }
+
+       .hot-news-group{
+         .hot-list-group{
+           li{
+             padding: 0 20px 20px;
+             border-bottom: 1px solid #eee;
+             overflow: hidden;
+             .left-group{
+               float: left;
+               width: 204px;
+               height: 72px;
+               position: relative;
+               .title{
+                  font-size: 16px;
+                 a{
+                   color: $mainFontColor;
+                   &:hover{
+                     color: #5c87d9;
+                   }
+                 }
+               }
+
+               .more{
+                 position: absolute;
+                 right: 0;
+                 bottom: 0;
+                 left: 0;
+                 .category{
+                   color: $themeColor;
+                   float:left;
+                   font-size: 12px;
+                 }
+                 .pub-time{
+                   color: $assistColor;
+                   float: right;
+                   font-size: 12px;
+                 }
+               }
+             }
+             .right-group{
+               float: right;
+               width: 102px;
+               height: 72px;
+               img{
+                 height: 100%;
+                 width: 100%;
+               }
+             }
+           }
+         }
+       }
     }
   }
 }
