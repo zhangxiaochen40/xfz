@@ -16,78 +16,10 @@
     .main-content-wrapper{
       $bannerWidth:$mainBoxWidth;
       $bannerHeight:202px;
+      background: #f2f2f2;
       float: left;
       width: 798px;
 
-      background-color: #f2f2f2;
-
-      .banner-group{
-        width: 798px;
-        height: 201px;
-        background: #0e275e;
-        position: relative;
-        overflow: hidden;
-        z-index: 0;
-        .banner-ul{
-          overflow: hidden;
-          width: $bannerWidth*2;
-          position: absolute;
-          left: 0;
-          li{
-            float: left;
-            width: $bannerWidth;
-            height: $bannerHeight;
-
-            img{
-              width: $bannerWidth;
-              height: $bannerHeight;
-
-            }
-          }
-        }
-
-        .arrow{
-          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-          font-size: 70px;
-          color: #fff;
-          position: absolute;
-          top: 50%;
-          margin-top: -45px;
-          cursor: pointer;
-        }
-        .left-arrow{
-          left: 20px;
-        }
-        .right-arrow{
-          right: 20px;
-        }
-
-        .page-control-group{
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 20px;
-
-          .page-control{
-            margin: 0 auto;
-            overflow: hidden;
-            width: 10*2px+8*2px+16*3px;
-            li{
-              width: 10px;
-              height: 10px;
-              border: 1px solid #fff;
-              border-radius: 50%;
-              float: left;
-              margin: 0 8px;
-              box-sizing: border-box;
-              cursor: pointer;
-              &.active{
-                background: #fff;
-              }
-            }
-          }
-        }
-      }
     }
 
   }

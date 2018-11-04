@@ -1,0 +1,109 @@
+@import "init.scss";
+@import "constants.scss";
+@import "header";
+@import "body";
+@import "footer";
+
+.main{
+  margin-top: 64px;
+  .course-nav{
+    $courseNavHeight:54px;
+    width: 100%;
+    box-shadow: 0 4px rgba(0,0,0,0.1);
+
+    .nav-container{
+      width: $pageWidth;
+      height: $courseNavHeight;
+      margin: 0 auto;
+      line-height: $courseNavHeight;
+      overflow: hidden;
+      .title{
+        float: left;
+        color: #696969;
+        font-size: 24px;
+      }
+
+      .nav-list{
+        float: left;
+        margin-left: 100px;
+        li{
+          float: left;
+          margin-left: 40px;
+          a{
+            color: #888;
+
+          }
+          &.active{
+            a{
+              color: $mainFontColor;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .wrapper{
+    .course-list{
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+
+      li{
+
+        $courseitemheight:280px;
+        $thumbnailHeight:158px;
+        width: 278px;
+        height: $courseitemheight;
+        margin-bottom: 20px;
+        background: #ffffff;
+        .thumbnail-group{
+          width: 100%;
+          height: $thumbnailHeight;
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .course-info{
+          padding: 16px;
+          width: 100%;
+          box-sizing: border-box;
+          height: $courseitemheight - $thumbnailHeight;
+
+          position: relative;
+          .title{
+            color: $mainFontColor;
+          }
+          .author{
+            color: $assistColor;
+            margin-top: 5px;
+            font-size: 14px;
+          }
+          .price-group{
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 10px;
+            text-align: right;
+
+            .free{
+              color: rgb(126,211,33);
+            }
+            .pay{
+              color: rgb(245,74,74);
+            }
+          }
+        }
+
+        &:hover{
+          box-shadow: 0 3px 10px rgba(0,0,0,1);
+        }
+      }
+    }
+  }
+}
