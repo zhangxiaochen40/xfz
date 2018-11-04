@@ -1,0 +1,167 @@
+@import "../common/init.scss";
+@import "../common/constants.scss";
+@import "../common/header";
+@import "../common/body";
+@import "../common/footer";
+@import "course_nav.scss";
+
+
+.main{
+
+  .wrapper{
+     width: 1070px;
+    margin-top: 20px;
+    .course-wrapper{
+      background: white;
+      .course-info{
+        padding: 20px;
+        .course-title{
+          font-size: 20px;
+          color: $mainFontColor;
+        }
+        .price-group{
+          margin-top: 20px;
+            overflow: hidden;
+            .share-group{
+              float: left;
+              color: $assistColor;
+              font-size: 14px;
+            }
+
+            .buy-group{
+              float: right;
+              .price {
+                font-size: 16px;
+              }
+              .free{
+                color: $freeColor;
+              }
+              .pay{
+                color: $payColor;
+              }
+
+              .buy-btn{
+                color: #ffffff;
+                background: #ff8d3f;
+                display: inline-block;
+                height: 40px;
+                width: 120px;
+                border-radius: 5px;
+                text-align: center;
+                line-height: 40px;
+                margin-left: 10px;
+              }
+            }
+          }
+      }
+
+      .video-group{
+        width: 100%;
+        height: 600px;
+      }
+    }
+
+    .bottom-wrapper{
+      margin-top: 20px;
+      overflow: hidden;
+
+      .course-detail-wrapper{
+          width: 700px;
+        float: left;
+
+        .item-group{
+          background: white;
+          padding: 20px;
+          .item-title{
+            color: $mainFontColor;
+            font-size: 18px;
+            border-left: 5px solid $themeColor;
+            padding-left: 16px;
+          }
+
+          .teacher-group{
+            margin-top: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            .avater-group{
+              float: left;
+              width: 40px;
+              height: 40px;
+              .avater{
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+              }
+            }
+            .teacher-info{
+              float: left;
+              margin-left: 20px;
+              color: $assistColor;
+              .teacher-name{
+              }
+            }
+
+
+          }
+
+          .item-content{
+            margin-top: 20px;
+              color: rgb(68,68,68);
+            line-height: 1.8;
+            }
+        }
+      }
+
+
+      .recomand-wrapper {
+         width: 355px;
+        float: right;
+         background: white;
+        padding: 20px;
+        box-sizing: border-box;
+          .recomand-title {
+              font-size: 18px;
+            color: $mainFontColor;
+          }
+
+          .course-list{
+            li {
+              overflow: hidden;
+              padding: 20px 0;
+              border-bottom: 1px solid #555555;
+
+              .course-info-group {
+                float: left;
+                width: 150px;
+                height: 90px;
+                position: relative;
+
+                .course-title{
+                  font-size: 16px;
+                  color: $mainFontColor;
+                }
+
+                .teacher{
+                  position: absolute;
+                  right: 0;
+                  left: 0;
+                  bottom: 0;
+                  color: $assistColor;
+                }
+              }
+
+              .thumbnail-group {
+                float: right;
+                width: 160px;
+                height: 90px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+          }
+        }
+    }
+  }
+}
