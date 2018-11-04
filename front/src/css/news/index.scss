@@ -1,8 +1,8 @@
-@import "init.scss";
-@import "constants.scss";
-@import "header";
-@import "footer";
-@import "body";
+@import "../common/init.scss";
+@import "../common/constants.scss";
+@import "../common/header";
+@import "../common/footer";
+@import "../common/body";
 
 .body{
   background: #f2f2f2;
