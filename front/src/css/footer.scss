@@ -1,0 +1,103 @@
+@import "init.scss";
+@import "constants.scss";
+
+.footer{
+  color: #c9c9c9;
+  padding-top: 20px ;
+  .top{
+    width: 100%;
+    height: 250px;
+    background:#3a3a3a ;
+    position: relative;
+    overflow: hidden;
+    .inner-box{
+
+      margin: 0 auto;
+      margin-top: 30px;
+      width: $pageWidth;
+      overflow: hidden;
+      .left {
+        width: 60%;
+        float: left;
+        .footer-partner {
+
+          li {
+            float: left;
+            height: 30px;
+            width: 80px;
+            margin: 20px;
+            img{
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+
+
+      .right{
+        a{
+            color: #c9c9c9;
+          }
+        float: right;
+        width: 40%;
+        .foot-logo{
+              width: 165px;
+              height: 44px;
+          background: url("https://www.bufanbiz.com/static/build/images/new-logo-footer.png") no-repeat;
+          background-size: 100% 100%;
+          margin-bottom: 20px;
+        }
+        .links{
+
+        }
+        .attention{
+          .showWx{
+            background: url("https://www.bufanbiz.com/static/build/images/wx-icon.png");
+            background-repeat: no-repeat;
+            background-size: 23%;
+            cursor: pointer;
+            &:hover .wxcode{
+              display: block;
+            }
+            .wxcode{
+              width: 180px;
+              height: 180px;
+              background: url("https://bufanbiz.com/static/build/images/bufanclass-wechat.jpg") no-repeat;
+              background-size: 100%;
+              position: absolute;
+              right: 550px;
+              top: 10px;
+              display: none;
+
+            }
+
+          }
+          .showWeibo{
+            background: url("https://www.bufanbiz.com/static/build/images/xl-icon.png") no-repeat;
+            background-size: 18%;
+            margin-left: 20px;
+          }
+
+          .weibo{
+            margin-left: 30px;
+            a{
+              color: white;
+            }
+          }
+          .wx{
+
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+  .bottom{
+    height: 68px;
+    background: #555555;
+    line-height: 68px;
+    text-align: center;
+    color: white;
+  }
+}

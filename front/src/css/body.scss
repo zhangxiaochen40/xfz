@@ -1,0 +1,233 @@
+@import "constants";
+
+.body{
+   background: #f2f2f2;
+}
+
+.main{
+  width: 100%;
+  margin-top: 64px+20px;
+  .wrapper{
+    width: $pageWidth;
+    //background-color: #f2f2f2;
+    margin: 0 auto;
+    overflow: hidden;
+
+    .main-content-wrapper{
+      $bannerWidth:$mainBoxWidth;
+      $bannerHeight:202px;
+      float: left;
+      width: 798px;
+
+      background-color: #f2f2f2;
+
+      .banner-group{
+        width: 798px;
+        height: 201px;
+        background: #0e275e;
+        position: relative;
+        overflow: hidden;
+        z-index: 0;
+        .banner-ul{
+          overflow: hidden;
+          width: $bannerWidth*2;
+          position: absolute;
+          left: 0;
+          li{
+            float: left;
+            width: $bannerWidth;
+            height: $bannerHeight;
+
+            img{
+              width: $bannerWidth;
+              height: $bannerHeight;
+
+            }
+          }
+        }
+
+        .arrow{
+          font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+          font-size: 70px;
+          color: #fff;
+          position: absolute;
+          top: 50%;
+          margin-top: -45px;
+          cursor: pointer;
+        }
+        .left-arrow{
+          left: 20px;
+        }
+        .right-arrow{
+          right: 20px;
+        }
+
+        .page-control-group{
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 20px;
+
+          .page-control{
+            margin: 0 auto;
+            overflow: hidden;
+            width: 10*2px+8*2px+16*3px;
+            li{
+              width: 10px;
+              height: 10px;
+              border: 1px solid #fff;
+              border-radius: 50%;
+              float: left;
+              margin: 0 8px;
+              box-sizing: border-box;
+              cursor: pointer;
+              &.active{
+                background: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.main{
+  .wrapper{
+     .sidebar-wrapper{
+      float: right;
+      width: 356px;
+      //height: 500px;
+      background-color: #ffffff;
+
+       .title-group{
+          padding: 20px;
+          overflow: hidden;
+         .title{
+           //float: left;
+           //font-size: 18px;
+           //color: #212121;
+           //font-size: 18px;
+          color: #e63929;
+          width: 315px;
+          height: 25px;
+          line-height: 25px;
+          border-bottom: 2px solid #f77669;
+          margin: 0 auto 25px;
+          padding-top: 25px;
+          padding-bottom: 5px;
+         }
+         .more{
+           float: right;
+           font-size: 14px;
+           color: $themeColor;
+         }
+       }
+       .advertise-group{
+         img{
+           width: 100%;
+         }
+       }
+
+       .focus-group{
+         padding: 0 20px;
+         overflow: hidden;
+         .left-group{
+           width: 190px;
+           float: left;
+           li{
+             width: 100%;
+             height: 50px;
+             background: url("https://www.bufanbiz.com/static/build/images/side-icon.png");
+             background-repeat: no-repeat;
+             background-size: 26%;
+             margin-bottom: 20px;
+
+             a{
+               float: left;
+               margin-left:90px ;
+               margin-top: 10px;
+               color: #878787;
+               font-size: 14px;
+             }
+           }
+           .zhihu{
+             background-position: 0 0;
+           }
+           .weibo {
+             background-position: 0 -63px;
+           }
+           .toutiao{
+            background-position: 0 -125px;
+           }
+         }
+
+         .right-group{
+           float: right;
+           width: 108px;
+           background: url("https://www.bufanbiz.com/static/build/images/bufanclass-wechat.jpg");
+           background-repeat: no-repeat;
+           background-size: 100%;
+           .desc{
+             margin-top: 100px;
+             text-align: center;
+             color: #878787;
+             font-size: 12px;
+           }
+         }
+       }
+
+       .hot-news-group{
+         .hot-list-group{
+           li{
+             padding: 0 20px 20px;
+             border-bottom: 1px solid #eee;
+             overflow: hidden;
+             .left-group{
+               float: left;
+               width: 204px;
+               height: 72px;
+               position: relative;
+               .title{
+                  font-size: 16px;
+                 a{
+                   color: $mainFontColor;
+                   &:hover{
+                     color: #5c87d9;
+                   }
+                 }
+               }
+
+               .more{
+                 position: absolute;
+                 right: 0;
+                 bottom: 0;
+                 left: 0;
+                 .category{
+                   color: $themeColor;
+                   float:left;
+                   font-size: 12px;
+                 }
+                 .pub-time{
+                   color: $assistColor;
+                   float: right;
+                   font-size: 12px;
+                 }
+               }
+             }
+             .right-group{
+               float: right;
+               width: 102px;
+               height: 72px;
+               img{
+                 height: 100%;
+                 width: 100%;
+               }
+             }
+           }
+         }
+       }
+    }
+  }
+}
