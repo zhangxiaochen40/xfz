@@ -1,0 +1,117 @@
+@import "init";
+@import "constants";
+body{
+  background: #f77669;
+}
+
+.mask-wrapper{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  background: rgba(0,0,0,0.3);
+  display: none;
+
+  .auth-wrapper{
+    width: 400px;
+    height: 500px;
+    margin: 40px auto;
+
+    .close-group{
+      width: 100%;
+      height: 40px;
+      background: #eeeeee;
+
+      .close-btn{
+        display: inline-block;
+        float: right;
+        margin-top: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+
+    }
+
+    .auth-inner-wrapper{
+        width: 100%;
+        height: 460px;
+        overflow: hidden;
+        position: relative;
+
+        .scroll-wrapper{
+          width: 400px*2;
+          //height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: white;
+
+          .auth-group{
+            width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+
+            .top-group{
+              width: 100%;
+              height: 36px;
+              border-bottom: 1px solid #eeeeee;
+              overflow: hidden;
+              line-height: 34px;
+              .title{
+                float: left;
+                color: $mainFontColor;
+                border-bottom: 3px solid #e63929;
+
+              }
+              .switch{
+                float: right;
+                color: $themeColor;
+
+              }
+            }
+
+            .form-group{
+              margin-top: 20px;
+              .input-group{
+                margin-bottom: 20px;
+                .form-control{
+                  border: 1px solid #cccccc;
+                  padding: 10px;
+                  width: 100%;
+                  height: 40px;
+                  box-sizing: border-box;
+                  outline: none;
+                }
+
+                .submit-btn{
+                  width: 100%;
+                  height: 40px;
+                  background: $themeColor;
+                  border: none;
+                  cursor: pointer;
+                  outline: none;
+                  color: #eeeeee;
+
+                }
+              }
+            }
+          }
+
+          .signin-group{
+            float: left;
+            background: #ffffff;
+          }
+          .signup-group{
+            float: left;
+            background: #878787;
+          }
+        }
+
+      }
+
+  }
+
+}
