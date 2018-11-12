@@ -36,6 +36,7 @@ function Auth() {
 Auth.prototype.run=function(){
     var self =this;
     self.listenShowhideEvent();
+    self.listenSignInEvent();
 };
 
 Auth.prototype.showEvent=function() {
@@ -69,6 +70,53 @@ Auth.prototype.listenShowhideEvent = function(){
        self.hideEvent();
     });
 
+};
+
+Auth.prototype.listenSignInEvent=function(){
+    var self =this;
+    var signingroup = $('.signin-group');
+    var telephone = signingroup.find("input[name='telephone']");
+    var password = signingroup.find("input[name='password']");
+    var remember = signingroup.find("input[name='remember']");
+
+    var submitBtn= signingroup.find(".submit-btn");
+
+    submitBtn.click(function () {
+        var tel = telephone.val();
+        var pwd =password.val();
+        var rem = remember.prop('checked');
+
+            xfzajax.post({
+            'url': '/account/login/',
+            'data': {
+                'telephone': tel,
+                'password': pwd,
+                'remember': rem?1:0,
+            },
+            'success': function (result) {
+                 if(result['code'] == 200){
+                    self.hideEvent();
+                    window.location.reload();
+                 }else{
+                     var messageObject = result['message'];
+                     if(typeof messageObject == 'string' || messageObject.constructor == String){
+                        window.messageBox.show(messageObject);
+                     }else{
+                        // {"password":['密码最大长度不能超过20为！','xxx'],"telephone":['xx','x']}
+                        for(var key in messageObject){
+                            var messages = messageObject[key];
+                            var message = messages[0];
+                            window.messageBox.show(message);
+                        }
+                     }
+
+                 }
+            },
+            'fail': function (error) {
+                console.log(error);
+            }
+        });
+    })
 };
 
 
