@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="//at.alicdn.com/t/font_890281_65y87i372d3.css">
     <link rel="stylesheet" href="{% static 'css/common/auth.min.css' %}">
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/auth.min.js' %}"></script>
-    <script src="{% static 'js/xfzajax.min.js' %}"></script>
     <script src="{% static 'js/message.min.js' %}"></script>
+    <script src="{% static 'js/xfzajax.min.js' %}"></script>
+
+    <script src="{% static 'js/front_base.min.js' %}"></script>
     {% block head %}
     
     {% endblock %}
@@ -39,8 +40,19 @@
         </ul>
         <div class="auth-box">
             <i class="icon-caidaniconwodehui iconfont"></i>
+            {% if user.is_authenticated %}
+                <a href="#" class="authenticated-box">
+                {{ user.username }}
+                </a>
+                <div class="user-more-box">
+                <i class="triangle"></i>
+                    <a href="#">管理系统</a>
+                    <a href="{% url 'xzfauth:logout' %}">退出登陆</a>
+                </div>
+            {% else %}
             <a href="#" class="signin-btn">登陆</a> /
             <a href="#" class="signup-btn">注册</a>
+            {% endif %}
         </div>
     </div>
 </header>
@@ -174,7 +186,7 @@
                                     <input type="text" class="form-control" name="img_captcha" placeholder="图形验证码">
                                 </div>
                                 <div class="input-group-addon">
-                                    <img src="" alt="">
+                                    <img src="{% url 'xzfauth:img_captcha' %}" alt="" class="img-captcha">
                                 </div>
                             </div>
                             <div class="input-group">
