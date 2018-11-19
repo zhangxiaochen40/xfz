@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     uid = ShortUUIDField()
     telephone = models.CharField(max_length=11, unique=True)
-    email = models.EmailField(max_length=100, unique=True)
+    email = models.EmailField(max_length=100, unique=True,null=True)
     username = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     is_stuff = models.BooleanField(default=False)

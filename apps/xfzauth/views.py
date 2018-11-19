@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect,reverse
 from django.contrib.auth import login, logout, authenticate
-from .forms import LoginForm
+from .forms import LoginForm,RegisterForm
 from django.http import JsonResponse,HttpResponse
 from django.views.decorators.http import require_POST
 from utils import restful
 from utils.captcha.xfzcaptcha import Captcha
 from io import BytesIO
 from utils.aliyunsdk import aliyunsms
+from django.core.cache import cache
+from apps.xfzauth.models import User
 
 
 @require_POST
@@ -32,6 +34,21 @@ def login_view(request):
     else:
         errors = form.get_errors()
         return restful.para_error(message=errors)
+
+
+@require_POST
+def register_view(request):
+    form = RegisterForm(request.POST)
+    if form.is_valid():
+        telephone = form.cleaned_data.get('telephone')
+        username =form.cleaned_data.get('username')
+        pwd = form.cleaned_data.get('password1')
+        user = User.object.create_user(telephone=telephone,username=username,password=pwd)
+        login(request,user)
+        return restful.ok()
+    else:
+        return restful.para_error(message=form.get_errors())
+
 
 
 def logout_view(request):
@@ -62,14 +79,22 @@ def img_captcha(request):
     # 从BytesIO的管道中，读取出图片数据，保存到response对象上
     response.write(out.read())
     response['Content-length'] = out.tell()
+    cache.set(text.lower(),text.lower(),5*60)
 
 
 def sms_captcha(request):
     telephone = request.GET.get('telephone')
     code = Captcha.gene_text()
-    # cache.set(telephone,code,5*60)
+    cache.set(telephone,code,5*60)
     print('短信验证码：',code)
     result = aliyunsms.send_sms('telephone','code')
     return restful.ok()
     # print(result)
     # return HttpResponse('success')
+
+
+def cache_test(request):
+    cache.set('zxczxc','1213123',5*60)
+    result =cache.get('zxczxc')
+    print(result)
+    return HttpResponse('success')
