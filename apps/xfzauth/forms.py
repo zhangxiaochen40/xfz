@@ -14,6 +14,7 @@ class LoginForm(forms.Form, FormMixin):
 
 class RegisterForm(forms.Form,FormMixin):
     telephone = forms.CharField(max_length=11)
+    username = forms.CharField()
     password1 = forms.CharField(max_length=16)
     password2 = forms.CharField(max_length=16)
     img_captcha = forms.CharField(max_length=4,min_length=4)

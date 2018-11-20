@@ -46,7 +46,10 @@
                 </a>
                 <div class="user-more-box">
                 <i class="triangle"></i>
+                    {% if user.is_staff %}
                     <a href="#">管理系统</a>
+                    {% endif %}
+
                     <a href="{% url 'xzfauth:logout' %}">退出登陆</a>
                 </div>
             {% else %}

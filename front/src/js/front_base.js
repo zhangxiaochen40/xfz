@@ -52,6 +52,7 @@ Auth.prototype.run=function(){
     self.listenSignInEvent();
     self.ListCaptchaClick();
     self.listenSmsCaptchaEvent();
+    self.listenSignupEvent();
 };
 
 Auth.prototype.showEvent=function() {
@@ -112,6 +113,43 @@ Auth.prototype.SmsSuccessEvent =function(){
             self.listenSmsCaptchaEvent();
         }
         },1000);
+};
+
+
+Auth.prototype.listenSignupEvent = function () {
+    var signupGroup = $('.signup-group');
+    var submitBtn = signupGroup.find('.submit-btn');
+    submitBtn.click(function (event) {
+        event.preventDefault();
+        var telephoneInput = signupGroup.find("input[name='telephone']");
+        var usernameInput = signupGroup.find("input[name='username']");
+        var imgCaptchaInput = signupGroup.find("input[name='img_captcha']");
+        var password1Input = signupGroup.find("input[name='password1']");
+        var password2Input = signupGroup.find("input[name='password2']");
+        var smsCaptchaInput = signupGroup.find("input[name='sms_captcha']");
+
+        var telephone = telephoneInput.val();
+        var username = usernameInput.val();
+        var img_captcha = imgCaptchaInput.val();
+        var password1 = password1Input.val();
+        var password2 = password2Input.val();
+        var sms_captcha = smsCaptchaInput.val();
+
+        xfzajax.post({
+            'url': '/account/register/',
+            'data': {
+                'telephone': telephone,
+                'username': username,
+                'img_captcha': img_captcha,
+                'password1': password1,
+                'password2': password2,
+                'sms_captcha': sms_captcha
+            },
+            'success': function (result) {
+                window.location.reload();
+            }
+        });
+    });
 };
 
 

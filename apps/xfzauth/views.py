@@ -81,13 +81,16 @@ def img_captcha(request):
     response['Content-length'] = out.tell()
     cache.set(text.lower(),text.lower(),5*60)
 
+    return response
+
 
 def sms_captcha(request):
     telephone = request.GET.get('telephone')
     code = Captcha.gene_text()
     cache.set(telephone,code,5*60)
     print('短信验证码：',code)
-    result = aliyunsms.send_sms('telephone','code')
+    print(code)
+    # result = aliyunsms.send_sms('telephone','code')
     return restful.ok()
     # print(result)
     # return HttpResponse('success')
