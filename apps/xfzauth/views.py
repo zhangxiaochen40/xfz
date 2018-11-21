@@ -50,7 +50,6 @@ def register_view(request):
         return restful.para_error(message=form.get_errors())
 
 
-
 def logout_view(request):
     """
     退出登陆
