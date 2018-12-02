@@ -6,6 +6,8 @@ from django.views.decorators.http import require_GET,require_POST
 from apps.news.models import NewsCategory2
 from utils import restful
 from .forms import NewsCategoryEditFrom
+import os
+from django.conf import settings
 
 
 def cms_login(request):
@@ -94,5 +96,17 @@ def del_news_category(request):
         return restful.ok()
     except:
         return restful.para_error(message='删除失败')
+
+
+@require_POST
+def upload_file(request):
+    file = request.FILES.get('file')
+    name =file.name
+    with open(os.path.join(settings.MEDIA_ROOT,name),'wb') as fp:
+        for chunk in file.chunks():
+            fp.write(chunk)
+    # 构建完整的上传的图片的地址
+    url = request.build_absolute_uri(settings.MEDIA_ROOT+name)
+    return restful.result(data={'url':url})
 
 

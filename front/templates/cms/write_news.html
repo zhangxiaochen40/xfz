@@ -1,9 +1,11 @@
 {% extends 'cms/base.html' %}
-
+{% load staticfiles %}
 {% block title %}
         发布新闻
 {% endblock %}
-
+{% block head %}
+<script src="{% static 'js/write_news.min.js' %}"></script>
+{% endblock %}
 
 {% block content-header %}
     <h1>
