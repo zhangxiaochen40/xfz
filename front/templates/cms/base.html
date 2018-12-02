@@ -94,7 +94,7 @@
                 {% if perms.news.change_news %}
                     <li class="header">新闻管理</li>
                     <li>
-                        <a href="{% url 'cms:news_list' %}">
+                        <a href="">
                             <i class="fa fa-list"></i>
                             <span>新闻列表</span>
                         </a>
@@ -112,7 +112,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'cms:banners' %}">
+                        <a href="">
                             <i class="fa fa-window-restore"></i>
                             <span>轮播图</span>
                         </a>
@@ -121,7 +121,7 @@
                 {% if perms.course.change_course %}
                     <li class="header">课程管理</li>
                     <li>
-                        <a href="{% url 'cms:pub_course' %}">
+                        <a href="">
                             <i class="fa fa-tv"></i>
                             <span>发布课程</span>
                         </a>
@@ -130,7 +130,7 @@
                 {% if user.is_superuser %}
                     <li class="header">员工管理</li>
                     <li>
-                        <a href="{% url 'cms:staffs' %}">
+                        <a href="">
                             <i class="fa fa-group"></i>
                             <span>员工管理</span>
                         </a>
