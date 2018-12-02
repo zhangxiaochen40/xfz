@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="category-form">分类</label>
                             <select name="category" id="category-form" class="form-control">
-                                {% for category in categories %}
+                                {% for category in category_list %}
                                     {% if news and news.category_id == category.pk %}
                                         <option value="{{ category.pk }}" selected>{{ category.name }}</option>
                                     {% else %}
