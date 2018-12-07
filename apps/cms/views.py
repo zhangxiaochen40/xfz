@@ -8,6 +8,8 @@ from utils import restful
 from .forms import NewsCategoryEditFrom
 import os
 from django.conf import settings
+import qiniu
+from qiniu import auth,Auth
 
 
 def cms_login(request):
@@ -108,5 +110,19 @@ def upload_file(request):
     # 构建完整的上传的图片的地址
     url = request.build_absolute_uri(settings.MEDIA_ROOT+name)
     return restful.result(data={'url':url})
+
+
+@require_GET
+def qntoken(request):
+    access_key = 'Qz4h7_q5efLZMyP4vkLgSRxCFNuMJdhPaQVUfPEu'
+    secret_key = 'ZUJE1YHLF435PloH_sBgLuiybCvod-7gkYNoAsRI'
+    # 构建鉴权对象
+    q = Auth(access_key, secret_key)
+    # 要上传的空间
+    bucket_name = 'zwork'
+    # 生成上传 Token，可以指定过期时间等
+    token = q.upload_token(bucket_name)
+
+    return restful.result(data={'token':token})
 
 
