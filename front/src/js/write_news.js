@@ -5,11 +5,58 @@ function News() {
 News.prototype.run = function(){
     var self = this;
     // self.listenFileUpload();
+    self.Ueditor();
     self.listenQiniuFileUpLoad();
+    self.submitContent();
+
 };
+
+//提交新闻内容
+News.prototype.submitContent=function() {
+    var submitBtn=$('#submit-btn');
+    submitBtn.click(function (event) {
+        event.preventDefault();
+        var title =  $("input[name='title']").val();
+        var category = $("select[name='category']").val();
+        var desc = $("input[name='desc']").val();
+        var thumbnail = $("input[name='thumbnail']").val();
+        var content = window.ue.getContent();
+
+        xfzajax.post({
+            'url': '/cms/write_news/',
+            'data': {
+                'title': title,
+                'category': category,
+                'desc': desc,
+                'thumbnail': thumbnail,
+                'content': content,
+            },
+            'success': function (result) {
+                if(result['code'] === 200){
+                    xfzalert.alertSuccess('恭喜！新闻发表成功！',function () {
+                        window.location.reload();
+                    });
+                }
+            }
+        });
+    });
+};
+
+
+News.prototype.Ueditor= function(){
+	window.UEDITOR_CONFIG.initialFrameHeight = 600;
+
+
+    window.ue = UE.getEditor('editor',{
+        'initialFrameHeight': 400,
+        'serverUrl': '/ueditor/upload/'
+    });
+};
+
 
 //用七牛云山传文件
 News.prototype.listenQiniuFileUpLoad=function(){
+    var self = this;
     var uploadBtn=$('#thumbnail-btn');
     uploadBtn.change(function (event) {
         var file =this.files[0];
@@ -30,7 +77,8 @@ News.prototype.listenQiniuFileUpLoad=function(){
                         region: qiniu.region.z2
                     };
                     var observable = qiniu.upload(file,key,token,putExtra,config);
-                    observable.subscribe({
+                     observable.subscribe({
+
                         'next': self.handleFileUploadProgress,
                         'error': self.handleFileUploadError,
                         'complete': self.handleFileUploadComplete
@@ -79,7 +127,7 @@ News.prototype.listenFileUpload = function(){
     uploadBtn.change(function () {
         var file = uploadBtn[0].files[0];
         var formData = new FormData();
-        formData.append('file',file)
+        formData.append('file',file);
         xfzajax.post({
             'url':'/cms/upload_file/',
             'data':formData,
@@ -89,7 +137,7 @@ News.prototype.listenFileUpload = function(){
                 if(result['code']===200)
                 {
                     var url = result['data']['url'];
-                    var thumbnailInput = $('#thumbnail-form')
+                    var thumbnailInput = $('#thumbnail-form');
                     thumbnailInput.val(url);
                 }
             }

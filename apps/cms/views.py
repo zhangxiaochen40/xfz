@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic import View
 from django.views.decorators.http import require_GET,require_POST
-from apps.news.models import NewsCategory2
+from apps.news.models import NewsCategory2,News
 from utils import restful
-from .forms import NewsCategoryEditFrom
+from .forms import NewsCategoryEditFrom,WriteNewsForm
 import os
 from django.conf import settings
 import qiniu
@@ -33,6 +33,21 @@ class write_news(View):
         return render(request,'cms/write_news.html',{
             'category_list':category_list
         })
+
+    def post(self,request):
+        form = WriteNewsForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            desc = form.cleaned_data.get('desc')
+            thumbnail = form.cleaned_data.get('thumbnail')
+            category_id = form.cleaned_data.get('category')
+            category = NewsCategory2.objects.get(pk=category_id)
+            content = form.cleaned_data.get('content')
+            News.objects.create(title=title,desc=desc,thumbnail=thumbnail,category=category,content=content)
+            return restful.ok()
+        else:
+            return restful.para_error(message=form.get_errors())
+
 
 
 @require_GET

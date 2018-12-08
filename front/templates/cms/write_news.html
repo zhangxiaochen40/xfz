@@ -4,8 +4,11 @@
         发布新闻
 {% endblock %}
 {% block head %}
-    <script src="https://unpkg.com/qiniu-js@2.5.2/dist/qiniu.min.js"></script>
-<script src="{% static 'js/write_news.min.js' %}"></script>
+    <script src="https://unpkg.com/qiniu-js@2.4.0/dist/qiniu.min.js"></script>
+<script src="{% static 'ueditor/ueditor.config.js' %}"></script>
+<script src="{% static 'ueditor/ueditor.all.min.js' %}"></script>
+
+    <script src="{% static 'js/write_news.min.js' %}"></script>
 {% endblock %}
 
 {% block content-header %}
@@ -72,8 +75,7 @@
                         </div>
                         <div class="form-group">
                             <label for="content-form">内容</label>
-                            <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
-
+                            <script id="editor" type="text/plain"></script>
                         </div>
                     </div>
                     <div class="box-footer">
