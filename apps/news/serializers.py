@@ -10,7 +10,7 @@ class NewsCategorySerializer(serializers.ModelSerializer):
 
 
 class NewsSerializer(serializers.ModelSerializer):
-    category = NewsCategory2()
+    category = NewsCategorySerializer()
     auth = AuthSerializers()
 
     class Meta:
