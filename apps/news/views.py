@@ -8,7 +8,7 @@ from django.http import Http404
 
 def index(request):
     count = settings.ONE_PAGE_NEWS_COUNT
-    news_list = News.objects.all()[0:count]
+    news_list = News.objects.select_related('category','auth').all()[0:count]
     category_list = NewsCategory2.objects.all()
     context = {
         'news_list': news_list,
@@ -29,7 +29,7 @@ def news_list(request):
     end = start+settings.ONE_PAGE_NEWS_COUNT
 
     if category_id == 0:
-        newses = News.objects.all()[start:end]
+        newses = News.objects.select_related('category','auth').all()[start:end]
     else:
         newses = News.objects.filter(category__id=category_id)[start:end]
     serializer = NewsSerializer(newses,many=True)
@@ -39,7 +39,7 @@ def news_list(request):
 
 def news_detail(request, news_id):
     try:
-        news_detail = News.objects.get(id=news_id)
+        news_detail = News.objects.select_related('category','auth').get(id=news_id)
         context = {
             'news_detail': news_detail
         }
