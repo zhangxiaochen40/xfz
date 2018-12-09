@@ -7,6 +7,32 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/news/index.min.css' %}">
     <script src="{% static 'js/index.min.js' %}"></script>
+    <script src="{% static 'arttemplate/template-web.js' %}"></script>
+    <script id="news-item" type="text/html">
+{% verbatim %}
+{{ each newses news index }}
+<li>
+    <div class="img">
+        <a href="/news/{{ news.id }}">
+            <img class="pic"  src="{{ news.thumbnail }}" alt="">
+        </a>
+    </div>
+    <div class="news-group">
+        <p class="title">
+            <a href="/news/{{ news.id }}">{{ news.title }}</a>
+        </p>
+        <p class="desc">
+            {{ news.desc }}
+        </p>
+        <p class="more">
+           <span class="category">{{ news.category.name }}</span>
+            <span class="pub-time">{{ news.pub_time|timeSince }}</span>
+        </p>
+    </div>
+</li>
+{{ /each }}
+{% endverbatim %}
+</script>
 {% endblock %}
 {% block main %}
 <div class="main">
@@ -34,9 +60,9 @@
             </div>
             <div class="list-outer-group">
                 <ul class="list-tab">
-                    <li class="active"><a href="#"></a>最新资讯</li>
+                    <li class="active" data-category="0"><a href="javascript:void(0)"></a>最新资讯</li>
                     {% for category in category_list %}
-                     <li><a href="#"></a>{{ category.name }}</li>
+                     <li data-category="{{ category.id }}"><a href="#"></a>{{ category.name }}</li>
                     {% endfor %}
 
                 </ul>
@@ -44,20 +70,20 @@
                     {% for news in news_list %}
                     <li>
                          <div class="img">
-                <a href="#">
-                    <img class="pic" src="{{ news.thumbnail }}" alt="">
-                </a>
-                </div>
-                <div class="news-group">
-                    <a href="#"><p class="title">{{ news.title }}</p></a>
+                            <a href="{% url 'news:news_detail' news.id %}">
+                                <img class="pic" src="{{ news.thumbnail }}" alt="">
+                            </a>
+                        </div>
+                        <div class="news-group">
+                            <a href="{% url 'news:news_detail' news.id %}"><p class="title">{{ news.title }}</p></a>
 
-                <p class="desc">{{ news.desc }}</p>
-                <p class="more">
-                    <span class="category">{{ news.category.name }}</span>
-                    <span class="pub-time">{{ news.pub_time|time_since }}</span>
-                    <span class="author">{{ news.auth.username }}</span>
-                </p>
-                </div>
+                        <p class="desc">{{ news.desc }}</p>
+                        <p class="more">
+                            <span class="category">{{ news.category.name }}</span>
+                            <span class="pub-time">{{ news.pub_time|time_since }}</span>
+                            <span class="author">{{ news.auth.username }}</span>
+                        </p>
+                        </div>
                     </li>
                     {% endfor %}
 
@@ -65,7 +91,7 @@
                 </ul>
 
                 <div class="load-more-group">
-                    <button class="load-more">加载更多</button>
+                    <button class="load-more" id="load-more-btn">加载更多</button>
                 </div>
             </div>
         </div>

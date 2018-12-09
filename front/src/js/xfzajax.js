@@ -1,6 +1,4 @@
-/**
- * Created by hynev on 2018/5/15.
- */
+
 
 function getCookie(name) {
     var cookieValue = null;

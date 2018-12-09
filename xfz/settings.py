@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.xfzauth',
     'apps.news',
     'apps.cms',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,6 @@ UEDITOR_QINIU_DOMAIN = QINIU_DOMAIN
 UEDITOR_UPLOAD_TO_SERVER = True
 UEDITOR_UPLOAD_PATH = MEDIA_ROOT
 UEDITOR_CONFIG_PATH = os.path.join(BASE_DIR,'front','dist','ueditor','config.json')
+
+# 设置新闻列表页 现实多少条新闻
+ONE_PAGE_NEWS_COUNT=1

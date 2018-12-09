@@ -34,7 +34,7 @@ class write_news(View):
             'category_list':category_list
         })
 
-    def post(self,request):
+    def post(self, request):
         form = WriteNewsForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data.get('title')
@@ -43,7 +43,7 @@ class write_news(View):
             category_id = form.cleaned_data.get('category')
             category = NewsCategory2.objects.get(pk=category_id)
             content = form.cleaned_data.get('content')
-            News.objects.create(title=title,desc=desc,thumbnail=thumbnail,category=category,content=content)
+            News.objects.create(title=title,desc=desc,thumbnail=thumbnail,category=category,content=content, auth=request.User.username)
             return restful.ok()
         else:
             return restful.para_error(message=form.get_errors())
