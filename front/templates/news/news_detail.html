@@ -8,6 +8,20 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/news/news_detail.min.css' %}">
+    <script src="{% static 'arttemplate/template-web.js' %}"></script>
+    <script src="{% static 'js/news_detial.min.js' %}"></script>
+    <script id="comment-item" type="text/html">
+{% verbatim %}
+    <li>
+        <div class="comment-info">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528129845916&di=536993042d5223862f8c4ab157ba6e72&imgtype=0&src=http%3A%2F%2Fpic1.ipadown.com%2Fimgs%2F201206120933354195.jpg" alt="" class="avatar">
+            <span class="author">{{ comment.author.username }}</span>
+            <span class="pub-time">{{ comment.pub_time|timeSince }}</span>
+        </div>
+        <p class="comment-content">{{ comment.content }}</p>
+    </li>
+{% endverbatim %}
+</script>
 {% endblock %}
 
 {% block main %}
@@ -38,25 +52,20 @@
                 <h3 class="title">文章评论（0）</h3>
                 <textarea class="comment-textarea" name="comment-textarea" placeholder="立即登陆，参与评论" ></textarea>
                 <div class="submit-btn-group">
-                    <button class="submit-btn">立即评论</button>
+                    <button class="submit-btn" data-news-id="{{ news_detail.id }}">立即评论</button>
                 </div>
                 <ul class="comment-list">
+                    {% for comment in news_detail.comment_set.all %}
                     <li>
                         <div class="comment-info">
                             <img src="https://tva2.sinaimg.cn/crop.0.0.1080.1080.180/6c44eb25jw8esjnbdi282j20u00u0n07.jpg" alt="" class="avatar">
-                            <span class="author">小张</span>
-                            <span class="pub-time">1小时前</span>
+                            <span class="author">{{ comment.author.username }}</span>
+                            <span class="pub-time">{{ comment.pub_time|time_since }}</span>
                         </div>
-                        <p class="comment-content">这是第一条评论</p>
+                        <p class="comment-content">{{ comment.content }}</p>
                     </li>
-                     <li>
-                        <div class="comment-info">
-                            <img src="https://tva2.sinaimg.cn/crop.0.0.1080.1080.180/6c44eb25jw8esjnbdi282j20u00u0n07.jpg" alt="" class="avatar">
-                            <span class="author">小张</span>
-                            <span class="pub-time">1小时前</span>
-                        </div>
-                        <p class="comment-content">这是第一条评论</p>
-                    </li>
+                    {% endfor %}
+
                 </ul>
             </div>
         </div>

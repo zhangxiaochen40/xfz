@@ -59,13 +59,19 @@ def comment(request):
 
 
 def news_detail(request, news_id):
+    """
+    新闻详情
+    :param request:
+    :param news_id:
+    :return:
+    """
     try:
         news_detail = News.objects.select_related('category', 'auth').get(id=news_id)
         context = {
             'news_detail': news_detail
         }
         return render(request, 'news/news_detail.html',context=context)
-    except:
+    except News.DoesNotExist:
         raise Http404
 
 

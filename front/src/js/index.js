@@ -186,6 +186,7 @@ Index.prototype.LoadMore=function(){
     var self =this;
     var loadBtn=$('#load-more-btn');
     loadBtn.click(function () {
+
         xfzajax.get({
             'url':'/news/list/',
             'data':{
