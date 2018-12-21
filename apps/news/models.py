@@ -27,3 +27,6 @@ class Comment(models.Model):
     pub_time = models.DateTimeField(auto_now_add=True)
     news = models.ForeignKey('News',on_delete=models.CASCADE)
     author = models.ForeignKey('xfzauth.User',on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-pub_time']

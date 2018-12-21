@@ -49,6 +49,14 @@ class write_news(View):
             return restful.para_error(message=form.get_errors())
 
 
+def banners(request):
+    """
+    轮播图
+    :param request:
+    :return:
+    """
+    return render(request,'cms/banners.html')
+
 
 @require_GET
 def news_category(request):

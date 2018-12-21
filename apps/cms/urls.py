@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import cms_login, index, write_news, news_category,add_news_category,edit_news_category,del_news_category
 from .views import upload_file,qntoken
+
+from . import views
 app_name = 'cms'
 
 urlpatterns = [
@@ -13,4 +15,5 @@ urlpatterns = [
     path('del_news_category/', del_news_category, name='del_news_category'),
     path('upload_file/', upload_file, name='upload_file'),
     path('token/',qntoken,name='qntoken'),
+    path('banners', views.banners, name='banners'),
 ]

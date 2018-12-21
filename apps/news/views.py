@@ -5,7 +5,7 @@ from django.conf import settings
 from utils import restful
 from django.http import Http404
 from .forms import CommentForm
-from apps.xfzauth.decorators import xfz_login_require
+from apps.xfzauth.decorators import xfz_login_required
 
 
 def index(request):
@@ -39,7 +39,7 @@ def news_list(request):
     return restful.result(data=data)
 
 
-@xfz_login_require
+@xfz_login_required
 def comment(request):
     """
     评论
