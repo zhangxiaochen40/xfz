@@ -146,8 +146,8 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'front','dist')
 ]
 
-MEDIA_URL='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Qiniu配置
 QINIU_ACCESS_KEY = 'Qz4h7_q5efLZMyP4vkLgSRxCFNuMJdhPaQVUfPEu'

@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic import View
 from django.views.decorators.http import require_GET,require_POST
-from apps.news.models import NewsCategory2,News
+from apps.news.models import NewsCategory2, News, Banner
 from utils import restful
-from .forms import NewsCategoryEditFrom,WriteNewsForm
+from .forms import NewsCategoryEditFrom, WriteNewsForm, AddBannerForm
 import os
 from django.conf import settings
 import qiniu
@@ -126,13 +126,13 @@ def del_news_category(request):
 @require_POST
 def upload_file(request):
     file = request.FILES.get('file')
-    name =file.name
+    name = file.name
     with open(os.path.join(settings.MEDIA_ROOT,name),'wb') as fp:
         for chunk in file.chunks():
             fp.write(chunk)
     # 构建完整的上传的图片的地址
-    url = request.build_absolute_uri(settings.MEDIA_ROOT+name)
-    return restful.result(data={'url':url})
+    url = request.build_absolute_uri(settings.MEDIA_URL+name)
+    return restful.result(data={'url': url})
 
 
 @require_GET
@@ -147,5 +147,23 @@ def qntoken(request):
     token = q.upload_token(bucket_name)
 
     return restful.result(data={'token':token})
+
+
+def add_banner(request):
+    """
+    添加轮播图
+    :param request:
+    :return:
+    """
+
+    forms = AddBannerForm(request.POST)
+    if forms.is_valid():
+        priority = forms.cleaned_data.get('priority')
+        img_url = forms.cleaned_data.get('img_url')
+        link_to = forms.cleaned_data.get('link_to')
+        banner = Banner.objects.create(priority=priority,img_url=img_url,link_to=link_to)
+        return restful.result(data={"banner_id":banner.pk})
+    else:
+        return restful.para_error(message=forms.get_errors())
 
 

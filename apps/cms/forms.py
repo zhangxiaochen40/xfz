@@ -1,5 +1,5 @@
 from django import forms
-from apps.news.models import News
+from apps.news.models import News, Banner
 
 
 class NewsCategoryEditFrom(forms.Form):
@@ -13,6 +13,12 @@ class WriteNewsForm(forms.ModelForm):
     class Meta:
         model = News
         exclude = ['category','auth','pub_time']
+
+
+class AddBannerForm(forms.ModelForm):
+    class Meta:
+        model = Banner
+        fields = ['priority', 'img_url', 'link_to']
 
 
 

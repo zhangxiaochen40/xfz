@@ -13,7 +13,7 @@ class httpCode(object):
 
 
 def result(code=httpCode.ok,message='',data=None,kwargs=None):
-    json_dic={'code':code,'message':message,'data':data}
+    json_dic={'code': code, 'message': message, 'data': data}
 
     if kwargs and isinstance(kwargs,dict) and kwargs.keys():
         json_dic.update(json_dic)
