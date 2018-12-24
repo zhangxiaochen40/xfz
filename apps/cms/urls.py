@@ -17,4 +17,6 @@ urlpatterns = [
     path('token/',qntoken,name='qntoken'),
     path('banners/', views.banners, name='banners'),
     path('add_banner/', views.add_banner, name='add_banner'),
+    path('banner_list/', views.banner_list, name='banner_list'),
+    path('delete_banner/', views.delete_banner, name='delete_banner'),
 ]

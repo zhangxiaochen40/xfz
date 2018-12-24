@@ -2,6 +2,35 @@ function Banners() {
 
 }
 
+
+Banners.prototype.LoadData = function(){
+    var self =this;
+    xfzajax.get({
+        'url':'/cms/banner_list/',
+        'success':function (result) {
+            if(result['code']===200){
+               var banners = result['data'];
+                for (var i=0;i<banners.length;i++){
+                    var banner = banners[i];
+                    var tpl = template('banner-item',{'banner':banner});
+                    var bannerGroup=$('.banner-list-group');
+                    bannerGroup.append(tpl);
+
+                    var bannerItem = bannerGroup.find('.banner-item:last');
+
+                    self.addImageSelectEvent(bannerItem);
+                    self.addRemoveBtn(bannerItem);
+                    self.saveBannerEvent(bannerItem);
+                }
+            }else
+            {
+                console.log('cuowu')
+            }
+        }
+    })
+};
+
+
 Banners.prototype.listenBannersAddBtn =function(){
     var self = this;
     var bannerBtn =$('#banner-add-btn');
@@ -53,7 +82,6 @@ Banners.prototype.addImageSelectEvent = function (bannerItem) {
     var image = bannerItem.find('.thumbnail');
     var imageInput = bannerItem.find('.image-input');
     // 图片是不能够打开文件选择框的，只能通过input[type='file']
-    console.log('123123123');
     image.click(function () {
         imageInput.click();
     });
@@ -70,7 +98,6 @@ Banners.prototype.addImageSelectEvent = function (bannerItem) {
             'success': function (result) {
                 if(result['code'] === 200){
                     var url = result['data']['url'];
-                    console.log(url)
                     image.attr('src',url);
                 }
             }
@@ -81,14 +108,40 @@ Banners.prototype.addImageSelectEvent = function (bannerItem) {
 
 Banners.prototype.addRemoveBtn = function(bannerItem){
     var removeBtn = bannerItem.find('.btn-close');
+    var bannerId = bannerItem.attr('data-banner-id');
     removeBtn.click(function () {
-        bannerItem.remove()
+        if(bannerId)
+        {
+            xfzalert.alertConfirm({
+                'text':'确定要删除吗',
+                'confirmCallback':function () {
+                    xfzajax.post({
+                        'url':'/cms/delete_banner/',
+                        'data':{
+                            'banner_id':bannerId
+                        },
+                        'success':function (result) {
+                            if(result['code']===200){
+                                bannerItem.remove();
+                                window.messageBox.showSuccess('轮播图删除成功')
+                            }
+                        }
+                    })
+                }
+            })
+        }
+        else
+        {
+            bannerItem.remove()
+        }
+        
     })
 };
 
 Banners.prototype.Run =function () {
     var self =this;
     self.listenBannersAddBtn();
+    self.LoadData();
 };
 
 $(function () {

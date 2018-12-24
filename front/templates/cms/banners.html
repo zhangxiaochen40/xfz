@@ -60,10 +60,18 @@
     </div>
      <script id="banner-item" type="text/html">
     {% verbatim %}
+    {{ if banner }}
+    <div class="box banner-item" data-banner-id="{{ banner.id }}">
+    {{ else }}
+    <div class="box banner-item">
+    {{ /if }}
 
-            <div class="box banner-item">
         <div class="box-header">
-            <span>位置：4</span>
+            {{ if banner }}
+            <span>位置：{{ banner.priority }}</span>
+            {{ else }}
+            <span>位置：0</span>
+            {{ /if }}
             <button class="btn btn-default btn-xs pull-right btn-close">
                 <i class="fa fa-close"></i>
             </button>
@@ -71,20 +79,32 @@
         <div class="box-body">
             <div class="thumbnail-group">
                 <input type="file" class="image-input" style="display: none;">
+                {{ if banner }}
+                <img class="thumbnail" src="{{ banner.img_url }}" alt="">
+                {{ else }}
                 <img class="thumbnail" src="/static/images/banner.png" alt="">
+                {{ /if }}
             </div>
             <div class="more-group">
                 <div class="form-group">
-                    <input type="number" class="form-control" name="priority">
+                    {{ if banner }}
+                    <input type="number" class="form-control" name="priority" value="{{ banner.priority }}">
+                    {{ else }}
+                    <input type="number" class="form-control" name="priority" value="">
+                    {{ /if }}
                 </div>
                 <div class="form-group">
+                    {{ if banner }}
+                    <input type="text" class="form-control" name="link_to" value="{{ banner.link_to }}">
+                    {{ else }}
                     <input type="text" class="form-control" name="link_to">
+                    {{ /if }}
                 </div>
             </div>
         </div>
-    <div class="box-footer">
-        <button class="btn btn-primary pull-right btn-save">保存</button>
-    </div>
+        <div class="box-footer">
+            <button class="btn btn-primary pull-right btn-save">保存</button>
+        </div>
     </div>
     {% endverbatim %}
     </script>

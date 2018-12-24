@@ -9,7 +9,8 @@ from .forms import NewsCategoryEditFrom, WriteNewsForm, AddBannerForm
 import os
 from django.conf import settings
 import qiniu
-from qiniu import auth,Auth
+from qiniu import auth, Auth
+from apps.news.serializers import BannerSerializer
 
 
 def cms_login(request):
@@ -165,5 +166,22 @@ def add_banner(request):
         return restful.result(data={"banner_id":banner.pk})
     else:
         return restful.para_error(message=forms.get_errors())
+
+
+def banner_list(request):
+    """
+    轮播图列表
+    :param request:
+    :return:
+    """
+    banners = Banner.objects.all()
+    serializers = BannerSerializer(banners, many=True)
+    return restful.result(data=serializers.data)
+
+
+def delete_banner(request):
+    banner_id = request.POST.get('banner_id')
+    Banner.objects.filter(pk=banner_id).delete()
+    return restful.ok()
 
 
