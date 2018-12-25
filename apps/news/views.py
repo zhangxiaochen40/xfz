@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import News, NewsCategory2, Comment
+from .models import News, NewsCategory2, Comment, Banner
 from .serializers import NewsSerializer, CommentSerializer
 from django.conf import settings
 from utils import restful
@@ -14,7 +14,8 @@ def index(request):
     category_list = NewsCategory2.objects.all()
     context = {
         'news_list': news_list,
-        'category_list': category_list
+        'category_list': category_list,
+        'banners': Banner.objects.all()
     }
     return render(request,'news/index.html', context=context)
 

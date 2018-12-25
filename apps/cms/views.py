@@ -5,7 +5,7 @@ from django.views.generic import View
 from django.views.decorators.http import require_GET,require_POST
 from apps.news.models import NewsCategory2, News, Banner
 from utils import restful
-from .forms import NewsCategoryEditFrom, WriteNewsForm, AddBannerForm
+from .forms import NewsCategoryEditFrom, WriteNewsForm, AddBannerForm, EditBannerForm
 import os
 from django.conf import settings
 import qiniu
@@ -31,7 +31,7 @@ class write_news(View):
     """
     def get(self,request):
         category_list=NewsCategory2.objects.all()
-        return render(request,'cms/write_news.html',{
+        return render(request,'cms/write_news.html', {
             'category_list':category_list
         })
 
@@ -183,5 +183,23 @@ def delete_banner(request):
     banner_id = request.POST.get('banner_id')
     Banner.objects.filter(pk=banner_id).delete()
     return restful.ok()
+
+
+def edit_banner(request):
+    """
+    编辑轮播图
+    :param request:
+    :return:
+    """
+    form = EditBannerForm(request.POST)
+    if form.is_valid():
+        pk = form.cleaned_data.get('pk')
+        priority = form.cleaned_data.get('priority')
+        img_url = form.cleaned_data.get('img_url')
+        link_to = form.cleaned_data.get('link_to')
+        Banner.objects.filter(pk=pk).update(priority=priority, img_url=img_url, link_to=link_to)
+        return restful.ok()
+    else:
+        return restful.para_error(message=form.get_errors())
 
 

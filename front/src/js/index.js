@@ -108,7 +108,7 @@ Banner.prototype.ininBanner = function(){
 //封装一个轮波图移动的方法
 Banner.prototype.animate = function(){
     var self =this;
-    self.bannerUl.animate({'left':-798*self.index},500);
+    self.bannerUl.stop().animate({'left':-798*self.index},500);
     self.pageControl.children('li').eq(self.index).addClass('active').siblings().removeClass('active')
 };
 
