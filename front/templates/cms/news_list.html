@@ -1,0 +1,89 @@
+{% extends 'cms/base.html' %}
+
+
+{% block head %}
+    <style>
+    .left-group{
+        margin-right: 5px;
+    }
+    </style>
+{% endblock %}
+
+{% block title %}
+新闻管理
+{% endblock %}
+
+{% block content-header %}
+<h1>新闻列表管理</h1>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <form action="" class="form-inline">
+                        <div class="form-group left-group">
+                            <label>时间：</label>
+                            <input type="text" class="form-control" name="start" placeholder="起始时间" readonly>
+                            <span>-</span>
+                            <input type="text" class="form-control" name="end" placeholder="结束时间" readonly>
+                            <label>标题：</label>
+                            <input type="text" class="form-control" name="title" placeholder="关键字">
+                        </div>
+                        <div class="form-group left-group">
+                            <label for="category-input">分类：</label>
+                            <select name="category" id="" class="form-control">
+                                <option value="0">所有分类</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.pk }}">{{ category.name }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary left-group">查询</button>
+                        </div>
+                        <div class="form-group">
+                            <a href="{% url 'cms:news_list' %}">清除查询</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>标题</th>
+                                <th>分类</th>
+                                <th>发布时间</th>
+                                <th>作者</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for news in newses %}
+                                <tr>
+                                <th><a href="{% url 'news:news_detail' news.id %}">{{ news.title }}</a></th>
+                                <th>{{ news.category.name }}</th>
+                                <th>{{ news.pub_time }}</th>
+                                <th>{{ news.auth.username }}</th>
+                                <th>
+                                    <a href="#" class="btn btn-info btn-xs">编辑</a>
+                                    <button class="btn btn-danger btn-xs">删除</button>
+                                </th>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

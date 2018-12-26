@@ -29,10 +29,10 @@ class write_news(View):
     """
     添加新闻
     """
-    def get(self,request):
-        category_list=NewsCategory2.objects.all()
-        return render(request,'cms/write_news.html', {
-            'category_list':category_list
+    def get(self, request):
+        category_list = NewsCategory2.objects.all()
+        return render(request, 'cms/write_news.html', {
+            'category_list': category_list
         })
 
     def post(self, request):
@@ -44,7 +44,8 @@ class write_news(View):
             category_id = form.cleaned_data.get('category')
             category = NewsCategory2.objects.get(pk=category_id)
             content = form.cleaned_data.get('content')
-            News.objects.create(title=title,desc=desc,thumbnail=thumbnail,category=category,content=content, auth=request.User.username)
+            News.objects.create(title=title, desc=desc, thumbnail=thumbnail,category=category,
+                                content=content, auth=request.user)
             return restful.ok()
         else:
             return restful.para_error(message=form.get_errors())
@@ -201,5 +202,14 @@ def edit_banner(request):
         return restful.ok()
     else:
         return restful.para_error(message=form.get_errors())
+
+
+def news_list(request):
+
+    context = {
+        'categories': NewsCategory2.objects.all(),
+        'newses': News.objects.select_related('category', 'auth').all()
+    }
+    return render(request, 'cms/news_list.html', context=context)
 
 
