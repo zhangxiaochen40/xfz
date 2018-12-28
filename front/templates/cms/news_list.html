@@ -7,6 +7,9 @@
         margin-right: 5px;
     }
     </style>
+        <link rel="stylesheet" href="{% static 'adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+    <script src="{% static 'adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'adminlte/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js' %}"></script>
 {% endblock %}
 
 {% block title %}
@@ -26,9 +29,9 @@
                     <form action="" class="form-inline">
                         <div class="form-group left-group">
                             <label>时间：</label>
-                            <input type="text" class="form-control" name="start" placeholder="起始时间" readonly>
+                            <input type="text" class="form-control" name="start" id="start-picker" placeholder="起始时间" readonly>
                             <span>-</span>
-                            <input type="text" class="form-control" name="end" placeholder="结束时间" readonly>
+                            <input type="text" class="form-control" name="end" id="end-picker" placeholder="结束时间" readonly>
                             <label>标题：</label>
                             <input type="text" class="form-control" name="title" placeholder="关键字">
                         </div>
