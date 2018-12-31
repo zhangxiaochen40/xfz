@@ -29,6 +29,15 @@ class EditBannerForm(forms.ModelForm):
         fields = ['priority', 'img_url', 'link_to']
 
 
+class EditNewsForm(forms.ModelForm):
+
+    category = forms.IntegerField()
+    pk = forms.IntegerField()
+
+    class Meta:
+        model = News
+        exclude = ['category', 'auth', 'pub_time']
+
 
 
 

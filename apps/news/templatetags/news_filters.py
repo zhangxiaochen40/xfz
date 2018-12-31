@@ -15,7 +15,6 @@ def time_since(value):
     3.如果是大于1小时小于24小时，那么就显示“xx小时前”
     4.如果是大于24小时小于30天以内，那么就显示“xx天前”
     5.否则就是显示具体的时间
-    2017/10/20 16:15
     """
     if not isinstance(value,datetime):
         return value

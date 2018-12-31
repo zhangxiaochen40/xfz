@@ -5,13 +5,16 @@ from django.views.generic import View
 from django.views.decorators.http import require_GET,require_POST
 from apps.news.models import NewsCategory2, News, Banner
 from utils import restful
-from .forms import NewsCategoryEditFrom, WriteNewsForm, AddBannerForm, EditBannerForm
+from .forms import NewsCategoryEditFrom, WriteNewsForm, AddBannerForm, EditBannerForm, EditNewsForm
 import os
 from django.conf import settings
 import qiniu
 from qiniu import auth, Auth
 from apps.news.serializers import BannerSerializer
 from django.core.paginator import Paginator
+from datetime import datetime
+from django.utils.timezone import make_aware
+from urllib import parse
 
 
 def cms_login(request):
@@ -210,7 +213,29 @@ class NewsListView(View):
     def get(self, request):
         # 当前页
         page = int(request.GET.get('p', 1))
+        start = request.GET.get('start')
+        end = request.GET.get('end')
+        title = request.GET.get('title')
+        category_id = int(request.GET.get('category', '0') or 0)
         news = News.objects.select_related('category', 'auth').all()
+
+        if start or end:
+            if start:
+                start_data = datetime.strptime(start, '%Y/%m/%d')
+            else:
+                start_data = datetime(year=2018,month=12,day=15)
+            if end:
+                end_data = datetime.strptime(end,'%Y/%m/%d')
+            else:
+                end_data = datetime.today()
+            news = news.filter(pub_time__range=(make_aware(start_data), make_aware(end_data)))
+
+        if title:
+            news = news.filter(title__icontains=title)
+
+        if category_id:
+            news = news.filter(category=category_id)
+
         paginator = Paginator(news, page)
         page_obj = paginator.page(page)
         context_data = self.get_pagination_data(paginator, page_obj)
@@ -219,6 +244,16 @@ class NewsListView(View):
             'newses': page_obj.object_list,
             'page_obj': page_obj,
             'paginator': paginator,
+            'start': start,
+            'end': end,
+            'title': title,
+            'category_id': category_id,
+            'url_query': '&'+parse.urlencode({
+                'start': start or '',
+                'end': end or '',
+                'title': title or '',
+                'category': category_id or ''
+            })
         }
         context.update(context_data)
         return render(request, 'cms/news_list.html', context=context)
@@ -253,6 +288,37 @@ class NewsListView(View):
             'right_has_more': right_has_more,
             'num_pages': num_pages
         }
+
+
+class EditNewsView(View):
+    """
+    编辑新闻
+    """
+    def get(self,request):
+        news_id = request.GET.get('news_id')
+        news = News.objects.get(pk=news_id)
+        category = NewsCategory2.objects.all()
+        return render(request,'cms/write_news.html',{
+            'news': news,
+            'category_list': category
+        })
+
+    def post(self,request):
+        form = EditNewsForm(request.POST)
+        if form.is_valid():
+            pk = form.cleaned_data.get('pk')
+            title = form.cleaned_data.get('title')
+            desc = form.cleaned_data.get('desc')
+            thumbnail = form.cleaned_data.get('thumbnail')
+            category_id = form.cleaned_data.get('category')
+            category = NewsCategory2.objects.get(pk=category_id)
+            content = form.cleaned_data.get('content')
+            News.objects.filter(pk=pk).update(title=title, desc=desc, thumbnail= thumbnail, content=content, category=category)
+            return restful.ok()
+        else:
+            return restful.para_error(message=form.get_errors())
+
+
 
 
 

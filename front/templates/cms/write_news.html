@@ -1,7 +1,12 @@
 {% extends 'cms/base.html' %}
 {% load staticfiles %}
 {% block title %}
+    {% if news %}
+        编辑新闻
+    {% else %}
         发布新闻
+    {% endif %}
+
 {% endblock %}
 {% block head %}
     <script src="https://unpkg.com/qiniu-js@2.4.0/dist/qiniu.min.js"></script>
@@ -13,7 +18,11 @@
 
 {% block content-header %}
     <h1>
+        {% if news %}
+        编辑新闻
+    {% else %}
         发布新闻
+    {% endif %}
     </h1>
 {% endblock %}
 
@@ -26,7 +35,8 @@
                         <div class="form-group">
                             <label for="title-form">标题</label>
                             {% if news %}
-                                <input type="text" class="form-control" name="title" id="title-form" value="{{ news.title }}">                                            {% else %}
+                                <input type="text" class="form-control" name="title" id="title-form" value="{{ news.title }}">
+                            {% else %}
                                 <input type="text" class="form-control" name="title" id="title-form">
                             {% endif %}
                         </div>
@@ -46,7 +56,8 @@
                         <div class="form-group">
                             <label for="desc-form">描述</label>
                             {% if news %}
-                                <input type="text" class="form-control" id="desc-form" name="desc" value="{{ news.desc }}">                                               {% else %}
+                                <input type="text" class="form-control" id="desc-form" name="desc" value="{{ news.desc }}">
+                            {% else %}
                                 <input type="text" class="form-control" id="desc-form" name="desc">
                             {% endif %}
                         </div>
@@ -75,7 +86,9 @@
                         </div>
                         <div class="form-group">
                             <label for="content-form">内容</label>
-                            <script id="editor" type="text/plain"></script>
+                            <script id="editor" type="text/plain">
+                               {{ news.content|safe }}
+                            </script>
                         </div>
                     </div>
                     <div class="box-footer">

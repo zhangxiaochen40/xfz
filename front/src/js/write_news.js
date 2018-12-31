@@ -14,6 +14,14 @@ News.prototype.run = function(){
 //提交新闻内容
 News.prototype.submitContent=function() {
     var submitBtn=$('#submit-btn');
+    var btn =$(this)
+    var news_data = btn.attr('data-news-id');
+    var url='';
+    if(news_data){
+        url='cms/edit_news/'
+    }else{
+        url='/cms/write_news/'
+    }
     submitBtn.click(function (event) {
         event.preventDefault();
         var title =  $("input[name='title']").val();
@@ -23,7 +31,7 @@ News.prototype.submitContent=function() {
         var content = window.ue.getContent();
 
         xfzajax.post({
-            'url': '/cms/write_news/',
+            'url': url,
             'data': {
                 'title': title,
                 'category': category,
