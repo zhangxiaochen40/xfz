@@ -25,8 +25,37 @@ CMSNewsList.prototype.initDatePicker = function () {
 };
 
 
+CMSNewsList.prototype.listenDelBtnEvent = function(){
+    var btns = $('.delBtn');
+    btns.click(function () {
+        var btn =$(this);
+        var news_id = btn.attr('data-news-id');
+        xfzalert.alertConfirm({
+            'title':'确定要删除吗',
+            'confirmCallback': function () {
+                xfzajax.post({
+                    'url': '/cms/delete_news/',
+                    'data': {
+                        'news_id': news_id
+                    },
+                    'success': function (result) {
+                        if(result['code']===200){
+                            window.location=window.location.href;
+                        }
+                    }
+                })
+            }
+
+        })
+    })
+};
+
+
 CMSNewsList.prototype.run = function () {
-    this.initDatePicker();
+    var self =this;
+    self.initDatePicker();
+    self.listenDelBtnEvent()
+
 };
 
 $(function () {

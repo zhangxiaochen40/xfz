@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.xfzauth',
     'apps.news',
     'apps.cms',
+    'apps.course',
     'rest_framework',
     'debug_toolbar'
 ]

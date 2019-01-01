@@ -319,6 +319,13 @@ class EditNewsView(View):
             return restful.para_error(message=form.get_errors())
 
 
+@require_POST
+def delete_news(request):
+    news_id = request.POST.get('news_id')
+    News.objects.filter(pk=news_id).delete()
+    return restful.ok()
+
+
 
 
 

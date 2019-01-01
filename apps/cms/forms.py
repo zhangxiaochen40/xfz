@@ -1,5 +1,6 @@
 from django import forms
 from apps.news.models import News, Banner
+from apps.course.models import Course, CourseCategory
 
 
 class NewsCategoryEditFrom(forms.Form):
@@ -37,6 +38,15 @@ class EditNewsForm(forms.ModelForm):
     class Meta:
         model = News
         exclude = ['category', 'auth', 'pub_time']
+
+
+class PubCourseForm(forms.ModelForm):
+    category_id = forms.IntegerField()
+    teacher_id = forms.IntegerField()
+
+    class Meta:
+        model = Course
+        exclude = ['category','teacher', 'pub_time']
 
 
 
