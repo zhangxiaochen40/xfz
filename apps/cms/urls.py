@@ -28,5 +28,5 @@ urlpatterns = [
 
 # 发布课程相关的url映射
 urlpatterns += [
-    path('pub_course', course_views.PubCourseView.as_view(), name='pub_course'),
+    path('pub_course/', course_views.PubCourseView.as_view(), name='pub_course'),
 ]

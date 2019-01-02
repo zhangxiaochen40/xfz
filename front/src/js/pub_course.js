@@ -28,7 +28,7 @@ Course.prototype.pubCourse = function(){
         var profile = window.ue.getContent();
 
         xfzajax.post({
-            'url':'cms/pub_course/',
+            'url':'/cms/pub_course/',
             'data':{
                 'title':title,
                 'category_id':category_id,

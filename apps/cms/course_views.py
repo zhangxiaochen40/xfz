@@ -5,10 +5,6 @@ from apps.course.models import CourseCategory, Teacher, Course
 from utils import restful
 
 
-def pub_course(request):
-    return render(request,'cms/pub_course.html')
-
-
 class PubCourseView(View):
     """
     发布课程
@@ -37,6 +33,8 @@ class PubCourseView(View):
             return restful.ok()
         else:
             return restful.para_error(message=form.get_errors())
+
+
 
 
 
