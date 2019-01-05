@@ -26,76 +26,29 @@
     </div>
     <div class="wrapper">
         <ul class="course-list">
+            {% for course in courses %}
             <li>
-                <a href="#">
+                <a href="{% url 'course:course_detail' course.pk %}">
                 <div class="thumbnail-group">
-                    <img src="https://static-image.xfz.cn/1541294726_320.jpg-website.news.list" alt="" class="thumbnail">
+                    <img src="{{ course.cover_url }}" alt="" class="thumbnail">
                 </div>
                 <div class="course-info">
-                    <p class="title">iG夺得LPL赛区首个全球总决赛冠军</p>
-                    <p class="author">小张</p>
+                    <p class="title">{{ course.title }}</p>
+                    <p class="author">{{ course.teacher.username }}</p>
                     <p class="price-group">
-                        <span class="free">免费</span>
+                        {% if course.price > 0 %}
+                            <span class="pay">{{ course.price }}</span>
+                        {% else %}
+                            <span class="free">免费</span>
+                        {% endif %}
+
                     </p>
                 </div>
                     </a>
             </li>
-            <li>
-                <a href="#">
-                <div class="thumbnail-group">
-                    <img src="https://static-image.xfz.cn/1541294726_320.jpg-website.news.list" alt="" class="thumbnail">
-                </div>
-                <div class="course-info">
-                    <p class="title">iG夺得LPL赛区首个全球总决赛冠军</p>
-                    <p class="author">小张</p>
-                    <p class="price-group">
-                        <span class="free">免费</span>
-                    </p>
-                </div>
-                    </a>
-            </li>
-            <li>
-                <a href="#">
-                <div class="thumbnail-group">
-                    <img src="https://static-image.xfz.cn/1541294726_320.jpg-website.news.list" alt="" class="thumbnail">
-                </div>
-                <div class="course-info">
-                    <p class="title">iG夺得LPL赛区首个全球总决赛冠军</p>
-                    <p class="author">小张</p>
-                    <p class="price-group">
-                        <span class="free">免费</span>
-                    </p>
-                </div>
-                    </a>
-            </li>
-            <li>
-                <a href="#">
-                <div class="thumbnail-group">
-                    <img src="https://static-image.xfz.cn/1541294726_320.jpg-website.news.list" alt="" class="thumbnail">
-                </div>
-                <div class="course-info">
-                    <p class="title">iG夺得LPL赛区首个全球总决赛冠军</p>
-                    <p class="author">小张</p>
-                    <p class="price-group">
-                        <span class="free">免费</span>
-                    </p>
-                </div>
-                    </a>
-            </li>
-            <li>
-                <a href="#">
-                <div class="thumbnail-group">
-                    <img src="https://static-image.xfz.cn/1541294726_320.jpg-website.news.list" alt="" class="thumbnail">
-                </div>
-                <div class="course-info">
-                    <p class="title">iG夺得LPL赛区首个全球总决赛冠军</p>
-                    <p class="author">小张</p>
-                    <p class="price-group">
-                        <span class="free">免费</span>
-                    </p>
-                </div>
-                    </a>
-            </li>
+            {% endfor %}
+
+
         </ul>
     </div>
 </div>

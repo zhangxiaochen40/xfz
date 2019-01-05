@@ -173,6 +173,13 @@ UEDITOR_CONFIG_PATH = os.path.join(BASE_DIR,'front','dist','ueditor','config.jso
 ONE_PAGE_NEWS_COUNT=1
 
 
+# 百度云的配置
+# 控制台->用户中心->用户ID
+BAIDU_CLOUD_USER_ID = '5f57cec405804665971030765c671225'
+# 点播VOD->全局设置->发布设置->安全设置->UserKey
+BAIDU_CLOUD_USER_KEY = 'e5f137dd63eb47c7'
+
+
 INTERNAL_IPS = ("127.0.0.1",)
 
 
