@@ -18,51 +18,19 @@
             </div>
             <div class="pay-list-group">
                 <ul class="pay-list">
-                    <li>
-                        <a href="#">
-                            <div class="pay-left">
-
-                            </div>
-                            <div class="pay-right">
-                                <p class="pay-title">如何写好一份商业计划书</p>
-                                <p class="pay-content">一份好的商业计划书，是创业成功的开始！</p>
-                                <p class="pay-price">￥8.8</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
+                   {% for payinfo in payinfos %}
+                   <li>
                         <a href="#">
                             <div class="pay-left img">
                             </div>
                             <div class="pay-right">
-                                <p class="pay-title">如何写好一份商业计划书</p>
-                                <p class="pay-content">一份好的商业计划书，是创业成功的开始！</p>
-                                <p class="pay-price">￥8.8</p>
+                                <p class="pay-title">{{ payinfo.title }}</p>
+                                <p class="pay-content">{{ payinfo.profile }}</p>
+                                <p class="pay-price">￥{{ payinfo.price }}</p>
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <div class="pay-left">
-                            </div>
-                            <div class="pay-right">
-                                <p class="pay-title">如何写好一份商业计划书</p>
-                                <p class="pay-content">一份好的商业计划书，是创业成功的开始！</p>
-                                <p class="pay-price">￥8.8</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="pay-left">
-                            </div>
-                            <div class="pay-right">
-                                <p class="pay-title">如何写好一份商业计划书</p>
-                                <p class="pay-content">一份好的商业计划书，是创业成功的开始！</p>
-                                <p class="pay-price">￥8.8</p>
-                            </div>
-                        </a>
-                    </li>
+                   {% endfor %}
                 </ul>
             </div>
         </div>

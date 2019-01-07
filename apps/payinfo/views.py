@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import PayInfoModel
 
 
 def payinfo(request):
@@ -7,4 +8,14 @@ def payinfo(request):
     :param request:
     :return:
     """
-    return render(request,'payinfo/payinfo.html')
+    context = {
+        'payinfos': PayInfoModel.objects.all()
+    }
+    return render(request,'payinfo/payinfo.html', context=context)
+
+
+
+
+
+
+
