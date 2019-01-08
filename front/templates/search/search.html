@@ -15,50 +15,39 @@
     <div class="wrapper">
         <div class="main-content-wrapper">
               <div class="search-group">
-                <input type="text" placeholder="可输入新闻关键词/作者名字搜索">
+                <form action="" method="get">
+                <input type="text" name="q" placeholder="可输入新闻关键词/作者名字搜索">
                 <div class="button">搜索</div>
+                </form>
             </div>
             <div class="list-outer-group">
-                <h2>热门推荐</h2>
+                {% if newses %}
+                    <h2>搜索结果</h2>
+                {% else %}
+                    <h2>热门推荐</h2>
+                {% endif %}
+                {% for news in newses %}
                 <ul class="list-inner-group">
                     <li>
                          <div class="img">
-                <a href="#">
-                    <img class="pic" src="https://static-image.xfz.cn/1540895911_874.jpg-website.news.list" alt="">
+                <a href="{% url 'news:news_detail' news.pk %}">
+                    <img class="pic" src="{{ news.thumbnail }}" alt="">
                 </a>
                 </div>
                 <div class="news-group">
-                    <a href="#"><p class="title">被马云寄予厚望，盒马鲜生要去三四线城市讲新故事</p></a>
+                    <a href="{% url 'news:news_detail' news.pk %}"><p class="title">{{ news.title }}</p></a>
 
-                <p class="desc">滚滚下沉大潮前，生鲜也不例外。</p>
+                <p class="desc">{{ news.desc }}</p>
                 <p class="more">
-                    <span class="category">深度报道</span>
-                    <span class="pub-time">1小时前</span>
-                    <span class="author">小张同学</span>
+                    <span class="category">{{ news.category.name }}</span>
+                    <span class="pub-time">{{ news.pub_time }}</span>
+                    <span class="author">{{ news.auth.username }}</span>
                 </p>
                 </div>
                     </li>
                 </ul>
+                {% endfor %}
 
-                <ul class="list-inner-group">
-                    <li>
-                         <div class="img">
-                <a href="#">
-                    <img class="pic" src="https://static-image.xfz.cn/1540889552_704.jpg-website.news.list" alt="">
-                </a>
-                </div>
-                <div class="news-group">
-                    <a href="#"><p class="title">“赌徒”金立</p></a>
-
-                <p class="desc">在手机市场，金立也是儒雅的谦谦君子，竞争对手都是天兵天将模样。</p>
-                <p class="more">
-                    <span class="category">深度报道</span>
-                    <span class="pub-time">1小时前</span>
-                    <span class="author">小张同学</span>
-                </p>
-                </div>
-                    </li>
-                </ul>
                 <div class="load-more-group">
                     <button class="load-more">加载更多</button>
                 </div>

@@ -6,6 +6,7 @@ from utils import restful
 from django.http import Http404
 from .forms import CommentForm
 from apps.xfzauth.decorators import xfz_login_required
+from django.db.models import Q
 
 
 def index(request):
@@ -79,4 +80,9 @@ def news_detail(request, news_id):
 
 
 def search(request):
-    return render(request, 'search/search.html')
+    context = {}
+    q = request.GET.get('q')
+    if q:
+        newsws = News.objects.all().filter(Q(title__icontains=q)|Q(desc__icontains=q))
+        context['newses'] = newsws
+    return render(request, 'search/search.html', context=context)
