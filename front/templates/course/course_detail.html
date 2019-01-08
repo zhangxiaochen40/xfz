@@ -9,6 +9,11 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/course/course_detail.min.css' %}">
+
+    <script src="{% static 'videojs/videojs-contrib-hls.min.js' %}"></script>
+<script src="{% static 'videojs/videojs-contrib-quality-levels.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.bdstatic.com/jwplayer/latest/cyberplayer.js"></script>
+    <script src="{% static 'js/course_detail.min.js' %}"></script>
 {% endblock %}
 
 {% block main %}
@@ -34,16 +39,19 @@
                     </div>
                     <div class="buy-group">
                         {% if course.price > 0 %}
-                            <span class="price pay">￥{{ course.price }}</span>
-                            <a href="#" class="buy-btn">立即购买</a>
+                            <span class="price pay">{{ course.price }}</span>
+                            <a href="{% url 'course:course_order' course.pk %}" class="buy-btn">立即购买</a>
                         {% else %}
                             <span class="price free">免费</span>
                         {% endif %}
-
                     </div>
                 </div>
             </div>
-            <div class="video-group"></div>
+            <div class="video-group">
+
+                 <span id="video-info" hidden data-video-url="{{ course.video_url }}" data-cover-url="{{ course.cover_url }}" data-course-id="{{ course.pk }}"></span>
+                    <div id="playercontainer"></div>
+            </div>
         </div>
 
         <div class="bottom-wrapper">
@@ -62,7 +70,6 @@
                         </div>
 
                     <p class="item-content">{{ course.teacher.profile }}
-
                     </p>
                 </div>
                 <div class="item-group">

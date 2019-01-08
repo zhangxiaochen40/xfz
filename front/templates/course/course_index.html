@@ -17,7 +17,7 @@
         <div class="nav-container">
             <h3 class="title">在线课堂</h3>
             <ul class="nav-list">
-                <li class="active"><a href="{% url 'course:course_index' %}">最新课堂</a></li>
+                <li class="active"><a href="#">最新课堂</a></li>
                 <li><a href="#">投资人说</a></li>
                 <li><a href="#">明星案例</a></li>
                 <li><a href="#">创业知识</a></li>
@@ -26,7 +26,7 @@
     </div>
     <div class="wrapper">
         <ul class="course-list">
-            {% for course in course_list %}
+            {% for course in courses %}
             <li>
                 <a href="{% url 'course:course_detail' course.pk %}">
                 <div class="thumbnail-group">
@@ -37,16 +37,18 @@
                     <p class="author">{{ course.teacher.username }}</p>
                     <p class="price-group">
                         {% if course.price > 0 %}
-                            <span class="pay">￥{{ course.price }}</span>
+                            <span class="pay">{{ course.price }}</span>
                         {% else %}
                             <span class="free">免费</span>
                         {% endif %}
 
                     </p>
                 </div>
-                </a>
+                    </a>
             </li>
             {% endfor %}
+
+
         </ul>
     </div>
 </div>
