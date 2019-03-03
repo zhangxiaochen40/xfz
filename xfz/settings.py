@@ -44,11 +44,12 @@ INSTALLED_APPS = [
     'apps.cms',
     'apps.course',
     'rest_framework',
-    'debug_toolbar'
+    # 'debug_toolbar',
+    'haystack'
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -184,34 +185,42 @@ BAIDU_CLOUD_USER_KEY = 'e5f137dd63eb47c7'
 
 INTERNAL_IPS = ("127.0.0.1",)
 
+#
+# DEBUG_TOOLBAR_PANELS = [
+#     # 代表是哪个django版本
+#     'debug_toolbar.panels.versions.VersionsPanel',
+#     # 用来计时的，判断加载当前页面总共花的时间
+#     'debug_toolbar.panels.timer.TimerPanel',
+#     # 读取django中的配置信息
+#     'debug_toolbar.panels.settings.SettingsPanel',
+#     # 看到当前请求头和响应头信息
+#     'debug_toolbar.panels.headers.HeadersPanel',
+#     # 当前请求的想信息（视图函数，Cookie信息，Session信息等）
+#     'debug_toolbar.panels.request.RequestPanel',
+#     # 查看SQL语句
+#     'debug_toolbar.panels.sql.SQLPanel',
+#     # 静态文件
+#     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+#     # 模板文件
+#     'debug_toolbar.panels.templates.TemplatesPanel',
+#     # 缓存
+#     'debug_toolbar.panels.cache.CachePanel',
+#     # 信号
+#     'debug_toolbar.panels.signals.SignalsPanel',
+#     # 日志
+#     'debug_toolbar.panels.logging.LoggingPanel',
+#     # 重定向
+#     'debug_toolbar.panels.redirects.RedirectsPanel',
+# ]
+#
+# DEBUG_TOOLBAR_CONFIG = {
+#     'JQUERY_URL': ''
+# }
 
-DEBUG_TOOLBAR_PANELS = [
-    # 代表是哪个django版本
-    'debug_toolbar.panels.versions.VersionsPanel',
-    # 用来计时的，判断加载当前页面总共花的时间
-    'debug_toolbar.panels.timer.TimerPanel',
-    # 读取django中的配置信息
-    'debug_toolbar.panels.settings.SettingsPanel',
-    # 看到当前请求头和响应头信息
-    'debug_toolbar.panels.headers.HeadersPanel',
-    # 当前请求的想信息（视图函数，Cookie信息，Session信息等）
-    'debug_toolbar.panels.request.RequestPanel',
-    # 查看SQL语句
-    'debug_toolbar.panels.sql.SQLPanel',
-    # 静态文件
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    # 模板文件
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    # 缓存
-    'debug_toolbar.panels.cache.CachePanel',
-    # 信号
-    'debug_toolbar.panels.signals.SignalsPanel',
-    # 日志
-    'debug_toolbar.panels.logging.LoggingPanel',
-    # 重定向
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-]
 
-DEBUG_TOOLBAR_CONFIG = {
-    'JQUERY_URL': ''
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'apps.news.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
 }

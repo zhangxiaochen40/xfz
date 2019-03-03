@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/search/search.min.css' %}">
-{#    <script src="../../dist/js/index.min.js"></script>#}
+    <script src="../../dist/js/index.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -26,8 +26,9 @@
                 {% else %}
                     <h2>热门推荐</h2>
                 {% endif %}
-                {% for news in newses %}
-                <ul class="list-inner-group">
+                {% for result in page.object_list %}
+                    {% with result as news  %}
+                    <ul class="list-inner-group">
                     <li>
                          <div class="img">
                 <a href="{% url 'news:news_detail' news.pk %}">
@@ -46,6 +47,7 @@
                 </div>
                     </li>
                 </ul>
+                    {% endwith %}
                 {% endfor %}
 
                 <div class="load-more-group">

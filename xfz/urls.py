@@ -23,7 +23,7 @@ from django.conf import settings
 urlpatterns = [
     path('', index, name='index'),
     path('news/', include('apps.news.urls')),
-    path('search', search,name='search'),
+    path('search/', include('haystack.urls')),
     path('cms/', include('apps.cms.urls')),
     path('account/', include('apps.xfzauth.urls')),
     path('course/', include('apps.course.urls')),
@@ -32,6 +32,6 @@ urlpatterns = [
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns.append(path('__debug__/',include(debug_toolbar.urls)))
+# if settings.DEBUG:
+#     import debug_toolbar
+#     urlpatterns.append(path('__debug__/',include(debug_toolbar.urls)))
